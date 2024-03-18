@@ -1,0 +1,14 @@
+{
+  "name": "tdsubs",
+  "version": "1.0.0",
+  "description": "subscribers for tick detector publishing",
+  "main": "main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zoy",
+  "license": "ISC",
+  "dependencies": {
+    "zeromq": "^6.0.0-beta.19"
+  }
+}
