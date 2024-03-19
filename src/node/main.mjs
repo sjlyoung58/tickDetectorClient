@@ -27,9 +27,9 @@ async function run() {
   // FactionChanges - factions arriving in and/or retreating from a System ~50 per day
   sock.subscribe('FactionChanges');
   
-  // Planned Topics:
   // FactionExpanded - report of the System a faction expanded from
-
+  sock.subscribe('FactionExpandedFrom');
+  
   sock.subscribe('Heartbeat'); // every 5 minutes
 
   console.log(`Subscriber connected to ${zmqURL}`);
