@@ -1,17 +1,38 @@
 import zmq from 'zeromq'; // note needs npm install zeromq@6.0.0-beta.19 (or higher)
-const port = 5551;
 
 var sock;
+
+// VPS Host
+const host = 'tcp://srv477848.hstgr.cloud'
+const port = 5551;
+
+// Local testing
+// const host = 'tcp://localhost'
+// const port = 5556;
+
+const zmqURL = `${host}:${port}`;
 
 async function run() {
   sock = new zmq.Subscriber;
 
-//  sock.connect(`tcp://localhost:${port}`);
-  sock.connect(`tcp://srv477848.hstgr.cloud:${port}`);
+ sock.connect(`${zmqURL}`);
+//  sock.connect(`tcp://srv477848.hstgr.cloud:${port}`); // VPS
+
+  // Galaxy Tick - one per day usually
   sock.subscribe('GalaxyTick');
+  
+  // System Tick - every detected system change, ~7k per day
   sock.subscribe('SystemTick');
-  sock.subscribe('Heartbeat');
-  console.log(`Subscriber connected to port ${port}`);
+
+  // FactionChanges - factions arriving in and/or retreating from a System ~50 per day
+  sock.subscribe('FactionChanges');
+  
+  // Planned Topics:
+  // FactionExpanded - report of the System a faction expanded from
+
+  sock.subscribe('Heartbeat'); // every 5 minutes
+
+  console.log(`Subscriber connected to ${zmqURL}`);
 
   for await (const [topic, msg] of sock) {
     const sTopic = topic.toString();
