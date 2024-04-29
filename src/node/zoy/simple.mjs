@@ -3,12 +3,12 @@ import zmq from 'zeromq'; // note needs npm install zeromq@6.0.0-beta.19 (or hig
 var sock;
 
 // VPS Host
-// const host = 'tcp://srv477848.hstgr.cloud'
-// const port = 5551;
+const host = 'tcp://infomancer.uk'
+const port = 5551;
 
 // Local testing
-const host = 'tcp://localhost'
-const port = 5556;
+// const host = 'tcp://localhost'
+// const port = 5556;
 
 const zmqURL = `${host}:${port}`;
 
