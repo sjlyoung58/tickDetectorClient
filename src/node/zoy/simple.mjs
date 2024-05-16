@@ -1,14 +1,16 @@
 import zmq from 'zeromq'; // note needs npm install zeromq@6.0.0-beta.19 (or higher)
+import { inflateSync, unzipSync, gunzipSync } from 'zlib';
 
 var sock;
 
 // VPS Host
-const host = 'tcp://infomancer.uk'
-const port = 5551;
+// const host = 'tcp://infomancer.uk'
+// const port = 5551;
 
 // Local testing
-// const host = 'tcp://localhost'
-// const port = 5556;
+const host = 'tcp://localhost'
+//const host = 'tcp://192.168.1.137'
+const port = 5555;
 
 const zmqURL = `${host}:${port}`;
 
@@ -35,12 +37,46 @@ async function run() {
 
   for await (const [topic, msg] of sock) {
     const sTopic = topic.toString();
-    const payload = msg.toString();
-    console.log(`${sTopic}: ${payload}`);
-  }
-}
+    const payload = msg;
+    switch (sTopic) {
+      // case 'GalaxyTick':
+      //   processGalaxytick(payload);
+      //   break;
+      case 'SystemTick':
+        processSystemTick(payload);
+        break;
+      // case 'FactionChanges':
+      //   processFactionChanges(payload);
+      //   break;
+      // case 'FactionExpandedFrom':
+      //   processFactionExpandedFrom(payload);
+      //   break;
+      case 'Heartbeat':
+        processHeartbeat(payload);
+        break;
+      case 'HeartbeatZ':
+        processHeartbeatZ(payload);
+        break;
+      default:
+        console.log(`Unhandled topic: ${sTopic}`);
+        break;
+    };
+  };
+};
 
 run();
+
+function processFactionChanges(payload) { console.log(`FactionChanges: ${payload}`) };
+function processFactionExpandedFrom(payload) { console.log(`FactionExpandedFrom: ${payload}`) };
+function processGalaxytick(payload) { console.log(`Galaxytick: ${payload}`) };
+function processSystemTick(payload) { console.log(`SystemTick: ${payload}`) };
+function processHeartbeat(payload) { console.log(`Heartbeat: ${payload}`) };
+// function processHeartbeatZ(payload) { console.log(`HeartbeatZ: ${inflateSync(payload)}`) };
+function processHeartbeatZ(payload) { 
+  console.log(`inflate HeartbeatZ: ${inflateSync(payload)}`);
+  console.log(`unzip HeartbeatZ: ${unzipSync(payload)}`);
+ };
+
 
 process.on('SIGINT', () => {
   sock.close();
