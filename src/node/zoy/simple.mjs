@@ -1,5 +1,5 @@
 import zmq from 'zeromq'; // note needs npm install zeromq@6.0.0-beta.19 (or higher)
-import { inflateSync, unzipSync, gunzipSync } from 'zlib';
+import { inflateSync, unzipSync } from 'zlib';
 
 var sock;
 
@@ -71,10 +71,10 @@ function processFactionExpandedFrom(payload) { console.log(`FactionExpandedFrom:
 function processGalaxytick(payload) { console.log(`Galaxytick: ${payload}`) };
 function processSystemTick(payload) { console.log(`SystemTick: ${payload}`) };
 function processHeartbeat(payload) { console.log(`Heartbeat: ${payload}`) };
-// function processHeartbeatZ(payload) { console.log(`HeartbeatZ: ${inflateSync(payload)}`) };
+
 function processHeartbeatZ(payload) { 
   console.log(`inflate HeartbeatZ: ${inflateSync(payload)}`);
-  console.log(`unzip HeartbeatZ: ${unzipSync(payload)}`);
+  // console.log(`unzip HeartbeatZ: ${unzipSync(payload)}`);
  };
 
 
