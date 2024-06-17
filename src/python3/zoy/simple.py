@@ -38,7 +38,7 @@ def run():
         topic, compressed_payload = msg
         topic_str = topic.decode()
         payload = zlib.decompress(compressed_payload).decode()
-        logging.info(f"{topic_str}: {payload}")  # No decompression for other topics
+        logging.info(f"{topic_str}: {payload}")
 
 
 if __name__ == "__main__":
