@@ -4,17 +4,17 @@ import zmq
 import zlib
 
 # Local testing
-HOST = "tcp://localhost"
-PORT = 5555
+# HOST = "tcp://localhost"
+# PORT = 5555
 
 # live Host
-# HOST = 'tcp://infomancer.uk'
-# PORT = 5551;
+HOST = 'tcp://infomancer.uk'
+PORT = 5551;
 
 # Define the topics to subscribe to
 SUBSCRIPTIONS = [
     "GalaxyTick",
-    # "SystemTick",
+    "SystemTick",
     "FactionChanges",
     "FactionExpandedFrom",
     "Heartbeat",
@@ -37,15 +37,8 @@ def run():
         msg = sock.recv_multipart()  # Receive a single message
         topic, compressed_payload = msg
         topic_str = topic.decode()
-
-        if topic_str == "HeartbeatZ":
-            try:
-                payload = zlib.decompress(compressed_payload)  # Handle DEFLATE format
-                logging.info(f"HeartbeatZ: {payload.decode()}")
-            except zlib.error:
-                logging.error(f"Error decompressing HeartbeatZ: {compressed_payload}")
-        else:
-            logging.info(f"{topic_str}: {compressed_payload.decode()}")  # No decompression for other topics
+        payload = zlib.decompress(compressed_payload).decode()
+        logging.info(f"{topic_str}: {payload}")  # No decompression for other topics
 
 
 if __name__ == "__main__":

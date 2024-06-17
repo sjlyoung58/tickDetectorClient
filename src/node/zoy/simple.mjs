@@ -4,13 +4,13 @@ import { inflateSync, unzipSync } from 'zlib';
 var sock;
 
 // VPS Host
-// const host = 'tcp://infomancer.uk'
-// const port = 5551;
+const host = 'tcp://infomancer.uk'
+const port = 5551;
 
 // Local testing
-const host = 'tcp://localhost'
-//const host = 'tcp://192.168.1.137'
-const port = 5555;
+// const host = 'tcp://localhost'
+// //const host = 'tcp://192.168.1.137'
+// const port = 5555;
 
 const zmqURL = `${host}:${port}`;
 
@@ -37,26 +37,26 @@ async function run() {
 
   for await (const [topic, msg] of sock) {
     const sTopic = topic.toString();
-    const payload = msg;
+    const payload = inflateSync(msg);
     switch (sTopic) {
-      // case 'GalaxyTick':
-      //   processGalaxytick(payload);
-      //   break;
+      case 'GalaxyTick':
+        processGalaxytick(payload);
+        break;
       case 'SystemTick':
         processSystemTick(payload);
         break;
-      // case 'FactionChanges':
-      //   processFactionChanges(payload);
-      //   break;
-      // case 'FactionExpandedFrom':
-      //   processFactionExpandedFrom(payload);
-      //   break;
+      case 'FactionChanges':
+        processFactionChanges(payload);
+        break;
+      case 'FactionExpandedFrom':
+        processFactionExpandedFrom(payload);
+        break;
       case 'Heartbeat':
         processHeartbeat(payload);
         break;
-      case 'HeartbeatZ':
-        processHeartbeatZ(payload);
-        break;
+      // case 'HeartbeatZ':
+      //   processHeartbeatZ(payload);
+      //   break;
       default:
         console.log(`Unhandled topic: ${sTopic}`);
         break;
@@ -72,10 +72,10 @@ function processGalaxytick(payload) { console.log(`Galaxytick: ${payload}`) };
 function processSystemTick(payload) { console.log(`SystemTick: ${payload}`) };
 function processHeartbeat(payload) { console.log(`Heartbeat: ${payload}`) };
 
-function processHeartbeatZ(payload) { 
-  console.log(`inflate HeartbeatZ: ${inflateSync(payload)}`);
-  // console.log(`unzip HeartbeatZ: ${unzipSync(payload)}`);
- };
+// function processHeartbeatZ(payload) { 
+//   console.log(`inflate HeartbeatZ: ${inflateSync(payload)}`);
+//   // console.log(`unzip HeartbeatZ: ${unzipSync(payload)}`);
+//  };
 
 
 process.on('SIGINT', () => {
