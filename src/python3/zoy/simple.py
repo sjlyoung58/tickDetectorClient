@@ -17,8 +17,7 @@ SUBSCRIPTIONS = [
     "SystemTick",
     "FactionChanges",
     "FactionExpandedFrom",
-    "Heartbeat",
-    "HeartbeatZ"
+    "Heartbeat"
 ]
 
 def run():
