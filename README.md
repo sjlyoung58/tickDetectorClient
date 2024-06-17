@@ -120,7 +120,7 @@ About 20 per day
 (the 'n' busiest systems, messages per second, message count by type )
 ## HTTP endpoints
 Currently the server only supports HTTP, not HTTPS (until I find time to configure my Docker nginx container with LetsEncrypt certs)
-There is currently one proof of concept http endpoint (for the latest Galaxy Tick) http://infomancer.uk:3058/galtick.json
+There is currently one proof of concept http endpoint (for the latest Galaxy Tick) http://tick.infomancer.uk/galtick.json
 
 *I WOULD PREFER THIS NOT TO BE POLLED UNTIL I HAVE HAD A CHANCE TO LOAD TEST MULTIPLE CLIENTS 'POLLING' THE URL (and see below)*
 
