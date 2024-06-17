@@ -8,11 +8,15 @@ During the Tick process (simplified explanation), each populated system undergoe
 
 For the first few years of the game, the tick process was relatively quick, completing in less than an hour. There were however latency issues, so the results of the tick took some time to become visible in game. The State Pass was very quickly followed by the Influence Pass, so for all intents and purposes attempts to see if a system had 'ticked' were based on waiting for new influence levels to be obsereved in the game (or via the EDDN network). Following the release of the Odyssey expansion on 18 May 2021 there was a huge increase in the number of stations present in the game which had a very significant impact on the duration of the tick process. One of the side effects of this was that it became possible to more easily observe discrete State Pass effects separately from Influence Pass effects. Zoy's Tick Detector looks for these state changes to indicate that the tick process has started. 
 
-## HTTP endpoints
-## ZeroMQ Pub/SubTopics
-### HeartBeat
-#### Example Messages
-Heartbeat with status showing this is immediately following startup (or restart)
+## ZeroMQ Pub/Sub Topics 
+### Connection Details
+- ZeroMQ Pub/Sub with a multipart message (Topic/Payload). Topic is not compressed, Payload *is* compressed with Zlib
+- host 'tcp://infomancer.uk' 
+- port 5551
+- example clients are provided in this project
+### Example Messages
+#### Topic: HeartBeat
+Heartbeat with status `startup` showing this is immediately following startup (or restart)
 ```json
 {"status": "startup",
 "timestamp": "2024-04-11T09:32:49.171Z",
@@ -28,16 +32,15 @@ Standard Heartbeat (every 5 minutes)
 "version": "0.1.1-alpha",
 "info": "topics and message contents subject to change"}
 ```
-### SystemTick
+#### Topic: SystemTick
 About 7000 per day
-#### Example Messages
 ```json
 {
   "system": "Gliese 9539",
   "systemAddress": 1458309206762,
   "schema": "notYetImplemented",
   "timeGapMins": "1074.0",
-  "timestamp": "2024-04-13T14:51:37Z",
+  "timestamp": "2024-04-13T14:51:37Z", 
   "dayCount": 1,
   "metrics": {
     "tickPass": "Inf",
@@ -82,14 +85,12 @@ A System Tick showing a retreat
   }
 }
 ```
-### GalaxyTick
-#### Example Messages
+#### Topic: GalaxyTick
 One Galaxy Tick message is expected per day
 
-The Galaxy Tick is just a special case of the System Tick (the first System Tick detected of the new tick process for that day), so the examples under SystemTick are valid for GalaxyTick
-### FactionChanges
+The Galaxy Tick is just a special case of the System Tick i.e. the first System Tick detected (showing a state change) of the new tick process for that day, so the examples under SystemTick are valid for GalaxyTick
+#### Topic: FactionChanges
 About 50 per day
-#### Example Messages
 ```json
 {
   "system": "Dakshmandi",
@@ -101,9 +102,8 @@ About 50 per day
   }
 }
 ```
-### FactionExpandedFrom
+#### Topic: FactionExpandedFrom
 About 20 per day
-#### Example Messages
 ```json
 {
   "system": "Shapsugabus",
@@ -115,9 +115,16 @@ About 20 per day
 }
 ```
 ## Topics Under Consideration
-### ConflictEnded
-### Stats
+### Topic: ConflictEnded
+### Topic: Stats
 (the 'n' busiest systems, messages per second, message count by type )
+## HTTP endpoints
+Currently the server only supports HTTP, not HTTPS (until I find time to configure my Docker nginx container with LetsEncrypt certs)
+There is currently one proof of concept http endpoint (for the latest Galaxy Tick) http://infomancer.uk:3058/galtick.json
+
+*I WOULD PREFER THIS NOT TO BE POLLED UNTIL I HAVE HAD A CHANCE TO LOAD TEST MULTIPLE CLIENTS 'POLLING' THE URL (and see below)*
+
+My intention is to replace this with a [Socket IO](https://socket.io/) implementation so changes are pushed to clients removing the need for polling completely
 ## Project Structure
 The example clients are held in the following hierarchical structure under the project's top level `src` directory...
 ```
