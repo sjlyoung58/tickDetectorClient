@@ -54,9 +54,6 @@ async function run() {
       case 'Heartbeat':
         processHeartbeat(payload);
         break;
-      // case 'HeartbeatZ':
-      //   processHeartbeatZ(payload);
-      //   break;
       default:
         console.log(`Unhandled topic: ${sTopic}`);
         break;
