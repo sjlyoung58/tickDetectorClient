@@ -42,12 +42,14 @@ About 7000 per day
   "timeGapMins": "1074.0",
   "timestamp": "2024-04-13T14:51:37Z", 
   "dayCount": 1,
+  "isColony": false,
   "metrics": {
     "tickPass": "Inf",
     "stateChange": false,
     "infChange": true,
     "infStates": false,
     "cmfInf": 0.685885,
+    "cmfName": "Gliese 9539 Gold Natural Industries",
     "cmfHasExpanded": false,
     "cmfInfDrop": "0.0037",
     "cmfExpansionTax": false,
@@ -68,12 +70,14 @@ A System Tick showing a retreat
   "timeGapMins": "172.3",
   "timestamp": "2024-04-13T04:22:36Z",
   "dayCount": 2,
+  "isColony": false,
   "metrics": {
     "tickPass": "Either",
     "stateChange": true,
     "infChange": true,
     "infStates": true,
     "cmfInf": 0.458,
+    "cmfName": "HIP 33275 Co",
     "cmfHasExpanded": false,
     "cmfInfDrop": "-0.0196",
     "cmfExpansionTax": false,
@@ -95,6 +99,7 @@ About 50 per day
 {
   "system": "Dakshmandi",
   "systemAddress": 3583923685739,
+  "isColony": false,
   "timestamp": "2024-04-13T02:39:33Z",
   "factionChanges": {
     "retreated": [],
@@ -108,6 +113,7 @@ About 20 per day
 {
   "system": "Shapsugabus",
   "systemAddress": 9468120868281,
+  "isColony": false,
   "timestamp": "2024-04-13T01:57:22Z",
   "faction": "Bluestar PMC",
   "InfDrop": "0.1383",
