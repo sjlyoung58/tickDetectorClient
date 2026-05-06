@@ -57,11 +57,13 @@ About 7000 per day
     "factionChanges": {
       "retreated": [],
       "arrived": []
-    }
+    },
+    "atRiskNNFactions": [],
+    "facCount": 7
   }
 }
 ```
-A System Tick showing a retreat
+A System Tick showing a retreat and an at-risk faction
 ```json
 {
   "system": "HIP 33275",
@@ -85,7 +87,11 @@ A System Tick showing a retreat
     "factionChanges": {
       "retreated": ["Xbaquitae Gold Comms Exchange"],
       "arrived": []
-    }
+    },
+    "atRiskNNFactions": [
+      { "name": "Xbaquitae Gold Comms Exchange", "newInf": 0.032, "previousInf": 0.058 }
+    ],
+    "facCount": 5
   }
 }
 ```
