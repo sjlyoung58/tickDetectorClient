@@ -59,7 +59,8 @@ About 7000 per day
       "arrived": []
     },
     "atRiskNNFactions": [],
-    "facCount": 7
+    "facCount": 7,
+    "population": 1200000000
   }
 }
 ```
@@ -72,7 +73,7 @@ A System Tick showing a retreat and an at-risk faction
   "timeGapMins": "172.3",
   "timestamp": "2024-04-13T04:22:36Z",
   "dayCount": 2,
-  "isColony": false,
+  "isColony": true,
   "metrics": {
     "tickPass": "Either",
     "stateChange": true,
@@ -91,7 +92,8 @@ A System Tick showing a retreat and an at-risk faction
     "atRiskNNFactions": [
       { "name": "Xbaquitae Gold Comms Exchange", "newInf": 0.032, "previousInf": 0.058 }
     ],
-    "facCount": 5
+    "facCount": 5,
+    "population": 500000
   }
 }
 ```
