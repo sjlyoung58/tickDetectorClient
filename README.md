@@ -60,7 +60,8 @@ About 7000 per day
     },
     "atRiskNNFactions": [],
     "facCount": 7,
-    "population": 1200000000
+    "population": 1200000000,
+    "allFacSwing": 0.0142
   }
 }
 ```
@@ -93,7 +94,8 @@ A System Tick showing a retreat and an at-risk faction
       { "name": "Xbaquitae Gold Comms Exchange", "newInf": 0.032, "previousInf": 0.058 }
     ],
     "facCount": 5,
-    "population": 500000
+    "population": 500000,
+    "allFacSwing": 0.0551
   }
 }
 ```
