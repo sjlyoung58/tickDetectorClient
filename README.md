@@ -61,7 +61,12 @@ About 7000 per day
     "atRiskNNFactions": [],
     "facCount": 7,
     "population": 1200000000,
-    "allFacSwing": 0.0142
+    "BGSActivityEstimate": {
+      "allFacSwing": 0.0142,
+      "popFactor": 0.172,
+      "signal": 0.083,
+      "tier": "Notable"
+    }
   }
 }
 ```
@@ -95,7 +100,12 @@ A System Tick showing a retreat and an at-risk faction
     ],
     "facCount": 5,
     "population": 500000,
-    "allFacSwing": 0.0551
+    "BGSActivityEstimate": {
+      "allFacSwing": 0.0551,
+      "popFactor": 0.540,
+      "signal": 0.102,
+      "tier": "Notable"
+    }
   }
 }
 ```
